@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Check {
-    public static void main(String[] args) {
+    public void check(){
         Scanner sc = new Scanner(System.in);
         checkMethod cM=new checkMethod();
         List<Student> list=new ArrayList<Student>();
