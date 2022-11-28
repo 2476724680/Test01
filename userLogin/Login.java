@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
-    public static void main(String[] args) {
+    public void login(){
         Scanner sc=new Scanner(System.in);
         loginMethod lM=new loginMethod();
         Map<String ,User> map=new HashMap<String,User>();
@@ -25,7 +25,15 @@ public class Login {
             case "3":lM.changePassWord(map);break;
             case "4":System.out.println("退出成功");
                 break loop;
+            default:
+                System.out.println("错误操作");
         }
         }
     }
+
+    public static void main(String[] args) {
+        Login login=new Login();
+        login.login();
+    }
+
 }

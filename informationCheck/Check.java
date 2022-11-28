@@ -1,5 +1,7 @@
 package informationCheck;
 
+import com.sun.deploy.net.proxy.WDefaultBrowserProxyConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,10 +27,11 @@ public class Check {
                 case "2": cM.deleteStudent(list);break;
                 case "3": cM.changeStudent(list);break;
                 case "4":cM.checkStudent(list);break;
-                case "5": {
+                case "5":
                     System.out.println("退出成功");
                     break loop;
-                }
+                default:
+                    System.out.println("错误操作");
             }
         }
     }

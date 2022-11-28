@@ -1,5 +1,6 @@
 package userLogin;
 
+import informationCheck.Check;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -10,6 +11,8 @@ public class loginMethod {
 
     static final boolean USERNAME_EXIST=true;
     static final boolean USERNAME_ABSENCE=false;
+    static final boolean NEVER_ENTER=false;
+    static final boolean ENTER=true;
 
     //登录功能
     public void login(Map<String, User> map) {
@@ -17,7 +20,31 @@ public class loginMethod {
         System.out.println("请输入用户名");
         String userName=sc.next();
         boolean flag=nameExist(map,userName);
+        if(flag){
+            System.out.println("请输入密码");
+            String password=sc.next();
+            if(map.get(userName).getPassword().equals(password)){
+                //生成验证码
+                for(int i=0;i<3;i++)
+                {
+               String str=creatWord();
+                System.out.println(str);
+                System.out.println("请输入验证码");
+                String checkWord=sc.next();
 
+                if(checkWord.equals(str)){
+                    System.out.println("登录成功");
+                    Check check=new Check();
+                    check.check();
+                    return;
+                }
+                else System.out.println("验证码错误，请重新输入");
+                }
+
+                System.out.println("三次验证码错误，退出登录界面");
+            }
+            else System.out.println("密码错误");
+        }else System.out.println("用户未注册，请先注册");
     }
 
     //注册功能
@@ -153,5 +180,27 @@ public class loginMethod {
         User user=map.get(userName);
         user.setPassword(password1);
         System.out.println("密码记录成功");
+    }
+
+
+    //生成验证码
+    public String creatWord(){
+        String str="abcdefghijklmnopqrstuvwxyz";
+        str=str+str.toUpperCase();
+        String str1="1234567890";
+        StringBuilder sb=new StringBuilder();
+        int count=0;
+
+        for(int i=0;i<5;i++)
+        {
+           if((int)(Math.random()*5+1)==1&&count==0)
+           {
+               count++;
+               sb.append(str1.charAt((int)(Math.random()*9+1)));
+               i++;
+           }
+           sb.append(str.charAt((int)(Math.random()*str.length())));
+        }
+    return sb.toString();
     }
 }
